@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../tod-app-next/.idea/todo-app-next.iml" filepath="$PROJECT_DIR$/../tod-app-next/.idea/todo-app-next.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/todo-app-svelte-kit.iml" filepath="$PROJECT_DIR$/.idea/todo-app-svelte-kit.iml" />
+    </modules>
+  </component>
+</project>

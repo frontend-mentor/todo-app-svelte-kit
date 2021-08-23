@@ -1,0 +1,92 @@
+<script lang="ts">
+	import type { AppState } from '../state';
+	import { selectIsDarkMode, useAppDispatch, addTodo } from '../state';
+	import TodoCheckmark from './todo-checkmark.svelte';
+
+	export let state: AppState;
+
+	$: darkMode = selectIsDarkMode(state);
+	$: title = '';
+
+	const dispatch = useAppDispatch();
+
+	const onKeyDown = (e: KeyboardEvent) => {
+		if (e.key === 'Enter') {
+			const value = title.trim();
+			if (value.length > 0) {
+				dispatch(addTodo(value));
+				title = '';
+			}
+		}
+	};
+</script>
+
+<div class="form-container" class:dark={darkMode}>
+	<TodoCheckmark {state} checked={false} />
+	<input class="todo-title" placeholder="Create a new todo..." bind:value={title} on:keydown={onKeyDown} />
+</div>
+
+<style>
+	.form-container {
+		margin: -102px 24px 24px;
+		padding: 14px 20px;
+
+		display: flex;
+		align-items: center;
+		gap: 12px;
+
+		border-radius: 5px;
+		background-color: white;
+	}
+
+	.todo-status {
+		border: 1px solid #e3e4f1;
+		border-radius: 50%;
+
+		height: 20px;
+		width: 20px;
+	}
+
+	.todo-title {
+		flex-grow: 1;
+		height: 100%;
+		margin-top: 2px;
+
+		border: 0;
+		background: none;
+
+		color: #393a4b;
+		caret-color: #3a7cfd;
+		outline: none;
+
+		font: 400 12px/1 Josefin Sans, sans-serif;
+	}
+
+	.dark.form-container {
+		background-color: #25273d;
+		color: #767992;
+	}
+
+	.dark .todo-title {
+		color: #c8cbe7;
+	}
+
+	@media all and (min-width: 592px) {
+		.form-container {
+			margin-top: -142px;
+			height: 64px;
+			gap: 24px;
+		}
+
+		.todo-title {
+			font-size: 18px;
+		}
+	}
+
+	@media (min-width: 592px) {
+		.form-container {
+			margin-left: 0;
+			margin-right: 0;
+		}
+	}
+</style>
